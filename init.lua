@@ -1,3 +1,4 @@
+vim.o.shell = "bash"
 -- This file simply bootstraps the installation of Lazy.nvim and then calls other files for execution
 -- This file doesn't necessarily need to be touched, BE CAUTIOUS editing this file and proceed at your own risk.
 local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
@@ -22,7 +23,12 @@ if not pcall(require, "lazy") then
   vim.fn.getchar()
   vim.cmd.quit()
 end
+-- ~/.config/nvim/init.lua
 
+-- Fix GUI app PATH on macOS before AstroNvim/Lazy sets up plugins
+vim.env.PATH = "/opt/homebrew/bin:/usr/local/bin:" .. vim.env.PATH
+
+-- existing AstroNvim bootstrap code continues below...
 require "lazy_setup"
 require "polish"
 
